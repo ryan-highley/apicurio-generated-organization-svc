@@ -1,0 +1,113 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Organization API",
+        "description": "Manages Organizations",
+        "version": "1.0"
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/organizations": {
+            "get": {
+                "summary": "List all Organizations",
+                "description": "Returns list of Organization IDs and Names",
+                "responses": {
+                    "200": {
+                        "description": "List of Organizations",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Organization"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/organization/{id}": {
+            "get": {
+                "summary": "Get Organization by ID",
+                "responses": {
+                    "200": {
+                        "description": "Organization by ID",
+                        "schema": {
+                            "$ref": "#/definitions/Organization"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update Organization by ID",
+                "responses": {
+                    "200": {
+                        "description": "Updated Organization",
+                        "schema": {
+                            "$ref": "#/definitions/Organization"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete Organization by ID",
+                "responses": {
+                    "200": {
+                        "description": "Successful Organization deletion"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "Organization ID",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        },
+        "/organization": {
+            "post": {
+                "summary": "Create new Organization",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Organization"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Organization creation",
+                        "schema": {
+                            "$ref": "#/definitions/Organization"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Organization": {
+            "title": "Root Type for Organization",
+            "description": "The root of the Organization type's schema.",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "example": "{\n    \"id\": 1,\n    \"name\": \"Creekwood Christian Church\"\n}"
+        }
+    }
+}
